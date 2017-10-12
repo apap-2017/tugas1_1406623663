@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>View Penduduk by NIK</title>
+</head>
+<body>
+	<h3>Masukkan NIK yang kamu mau!</h3>
+	<form  th:action="@{'/penduduk'}" method="get" id="formnik">
+		<input type="text" class="form-control" id="nik" name="nik"
+			placeholder="Search" />
+			<button type="submit" value="submit" id="submitnik" name="submitnik">Submit</button>
+	</form>
+</body>
+</html>
+
+
+
+
+
