@@ -17,7 +17,7 @@ import com.example.tugas1.model.PendudukModel;
 
 @Mapper
 public interface KeluargaMapper {
-
+	//fitur2
 	@Select("select * from penduduk join keluarga on keluarga.id = penduduk.id_keluarga where keluarga.nomor_kk = #{nomor_kk}")
 	@Results(value = {
 			@Result(property = "id", column = "id"), @Result(property = "nik", column = "nik"),

@@ -3,6 +3,7 @@ package com.example.tugas1.dao;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Insert;
@@ -17,10 +18,14 @@ import com.example.tugas1.model.PendudukModel;
 
 @Mapper
 public interface PendudukMapper {
+	
+	//fitur 1
 	// Penduduk
 	@Select("select * " + "from penduduk " + "where nik = #{nik}")
-	@Results(value = { @Result(property = "id", column = "id"), @Result(property = "nik", column = "nik"),
-			@Result(property = "nama", column = "nama"), @Result(property = "tempat_lahir", column = "tempat_lahir"),
+	@Results(value = { @Result(property = "id", column = "id"), 
+			@Result(property = "nik", column = "nik"),
+			@Result(property = "nama", column = "nama"), 
+			@Result(property = "tempat_lahir", column = "tempat_lahir"),
 			@Result(property = "tanggal_lahir", column = "tanggal_lahir"),
 			@Result(property = "jenis_kelamin", column = "jenis_kelamin"),
 			@Result(property = "golongan_darah", column = "golongan_darah"),
@@ -29,28 +34,31 @@ public interface PendudukMapper {
 			@Result(property = "pekerjaan", column = "pekerjaan"), @Result(property = "is_wni", column = "is_wni"),
 			@Result(property = "is_wafat", column = "is_wafat"),
 			@Result(property = "id_keluarga", column = "id_keluarga"),
-			@Result(property = "keluarganya", column = "id", javaType = KeluargaModel.class, one = @One(select = "selectKeluarganya")) })
+			@Result(property = "keluarganya", column = "id_keluarga", javaType = KeluargaModel.class, one = @One(select = "selectKeluarganya")) })
 	PendudukModel selectPenduduk(@Param("nik") String nik);
 
 	// Keluarga
 	@Select("select id, alamat, RT, RW, id_kelurahan from keluarga where id= #{id_keluarga}")
-	@Results(value = { @Result(property = "id", column = "id"), @Result(property = "alamat", column = "alamat"),
-			@Result(property = "RT", column = "RT"), @Result(property = "RW", column = "RW"),
-			@Result(property = "kelurahannya", column = "id", javaType = KelurahanModel.class, one = @One(select = "selectKelurahannya")) })
+	@Results(value = {
+			@Result(property = "id", column = "id"),
+			@Result(property = "alamat", column = "alamat"),
+			@Result(property = "RT", column = "RT"),
+			@Result(property = "RW", column = "RW"),
+			@Result(property = "kelurahannya", column = "id_kelurahan", javaType = KelurahanModel.class, one = @One(select = "selectKelurahannya")) })
 	KeluargaModel selectKeluarganya(@Param("id") String id);
 
 	// Kelurahan
 	@Select("select id, id_kecamatan, nama_kelurahan from kelurahan where id= #{id_kelurahan}")
 	@Results(value = { @Result(property = "id", column = "id"),
 			@Result(property = "nama_kelurahan", column = "nama_kelurahan"),
-			@Result(property = "kecamatannya", column = "id", javaType = KecamatanModel.class, one = @One(select = "selectKecamatannya")) })
+			@Result(property = "kecamatannya", column = "id_kecamatan", javaType = KecamatanModel.class, one = @One(select = "selectKecamatannya")) })
 	KelurahanModel selectKelurahannya(@Param("id") String id);
 
 	// kecamatan
 	@Select("select id, id_kota, nama_kecamatan from kecamatan where id= #{id_kecamatan}")
 	@Results(value = { @Result(property = "id", column = "id"),
 			@Result(property = "nama_kecamatan", column = "nama_kecamatan"),
-			@Result(property = "kotanya", column = "id", javaType = KotaModel.class, one = @One(select = "selectKotanya")) })
+			@Result(property = "kotanya", column = "id_kota", javaType = KotaModel.class, one = @One(select = "selectKotanya")) })
 	KecamatanModel selectKecamatannya(@Param("id") String id);
 
 	// kota
@@ -60,7 +68,11 @@ public interface PendudukMapper {
 	KotaModel selectKotanya(@Param("id") String id);
 
 	
-
+	//fitur 3
 	@Insert("INSERT INTO penduduk (nama,tempat_lahir,tanggal_lahir,jenis_kelamin,is_wni,id_keluarga, perkerjaan, agama, status_perkawinan, golongan_darah, is_wafat, status_dalam_keluarga) VALUES (#nama}, #{tempat_lahir}, #{tanggal_lahir}, #{jenis_kelamin},{#is_wni),{#id_keluarga},{#perkerjaan},{#agama},{#status_perkawinan},{#golongan_darah},{#is_wafat},{#status_dalam_keluarga}")
 	void addPenduduk(PendudukModel penduduk);
+	
+	//fitur 7
+	@Update("UPDATE PENDUDUK SET is_wafat = 1 WHERE nik = #{nik}")
+	 void updatePendudukWafat(String nik);
 }

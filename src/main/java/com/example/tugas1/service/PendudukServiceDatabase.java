@@ -16,7 +16,8 @@ public class PendudukServiceDatabase implements PendudukService {
 
 	@Autowired
 	private PendudukMapper pendudukMapper;
-	
+
+	//fitur1
 	//private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PendudukServiceDatabase.class);
 	@Override
 	public PendudukModel selectPenduduk(String nik) {
@@ -28,10 +29,25 @@ public class PendudukServiceDatabase implements PendudukService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	//fitur3
 	@Override
 	public void addPenduduk(PendudukModel penduduk) {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void updatePendudukWafat(String nik) {
+		pendudukMapper.updatePendudukWafat(nik);
+		
+	}
+	
+	//fitur5
+//	@Override
+//	public void updatePenduduk (PendudukModel penduduk)
+//    {
+//    		log.info ("penduduk " + penduduk + " updated");
+//    		pendudukMapper.updatePenduduk(penduduk);
+//    }
+//	
 	
 }

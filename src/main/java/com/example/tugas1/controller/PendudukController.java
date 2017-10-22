@@ -26,13 +26,15 @@ public class PendudukController {
 	
 	@Autowired
 	KeluargaService keluargaDAO;
-
+	
+	//index
     @RequestMapping("/")
     public String index ()
     {
         return "index";
     }
-
+    
+    //fitur 1
     @RequestMapping("/penduduk")
     public String viewPath (Model model,
             @RequestParam(value = "nik", required = true) String nik)
@@ -41,7 +43,7 @@ public class PendudukController {
 
         if (penduduk != null) {
             model.addAttribute ("penduduk", penduduk);
-//            System.out.println(penduduk);
+            System.out.println(penduduk);
             return "view-penduduk";
         } else {
 //            model.addAttribute ("nik", nik);
@@ -73,7 +75,9 @@ public class PendudukController {
     {
     	
     KeluargaModel keluarga = keluargaDAO.selectKeluarga2(id_keluarga);
-    String kode_kecamatan = keluarga.getKelurahannya().getKecamatannya().getKode_kecamatan();
+    String nomor_kk = keluarga.getNomor_kk();
+    KeluargaModel keluarga2 = keluargaDAO.selectKeluarga(nomor_kk);
+    String kode_kecamatan = keluarga2.getKelurahannya().getKecamatannya().getKode_kecamatan();
     //String id_kota = Integer.toString(keluarga.getKotanya().getId());
     String nik = "31"+kode_kecamatan;
     	PendudukModel penduduk = new PendudukModel(0, nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, is_wni, id_keluarga, agama, pekerjaan, status_perkawinan, status_dalam_keluarga, golongan_darah, is_wafat, keluarga, keluarga.getKelurahannya(), keluarga.getKecamatannya(), keluarga.getKotanya());
@@ -82,4 +86,36 @@ public class PendudukController {
     return "success-add";
     }
     
+    //soal 5 update penduduk
+    @RequestMapping("/penduduk/ubah/{NIK}")
+    public String update (Model model, @PathVariable(value = "NIK") String nik)
+    {
+    	 PendudukModel penduduk = pendudukDAO.selectPenduduk (nik);
+
+         if (penduduk != null) {
+             model.addAttribute ("penduduk", penduduk);
+             return "form-update";
+         } else {
+             
+             return "not-found";
+         }
+    	
+    }
+    
+//    @RequestMapping(value = "/penduduk/ubah/submit", method = RequestMethod.POST)
+//   public String updateSubmit(PendudukModel penduduk)
+//    		{
+//    			pendudukDAO.updatePenduduk(penduduk);
+//    			return "success-update";
+//    		}
+    
+    //fitur 7
+    @RequestMapping(value = "/penduduk/mati/{nik}")
+    public String updateKematian(Model model, @PathVariable(value = "nik", required = false) String nik) {
+     PendudukModel penduduk = pendudukDAO.selectPenduduk(nik);
+     penduduk.setIs_wafat(1);
+     pendudukDAO.updatePendudukWafat(nik);
+     model.addAttribute("penduduk", penduduk);
+     return "sukses-update-kematian";
+    }
 }
