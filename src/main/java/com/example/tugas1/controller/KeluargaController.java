@@ -18,7 +18,7 @@ import com.example.tugas1.service.KeluargaService;
 public class KeluargaController {
 	@Autowired
     KeluargaService KeluargaDAO;
-	
+	//fitur2
 	 @RequestMapping("/keluarga")
 	    public String viewPath (Model model,
 	            @RequestParam(value = "nomor_kk", required = true) String nomor_kk)
