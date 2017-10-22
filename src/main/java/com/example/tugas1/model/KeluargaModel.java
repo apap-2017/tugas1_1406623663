@@ -1,5 +1,6 @@
 package com.example.tugas1.model;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class KeluargaModel {
 	private int id;
-	private int nomor_kk;
+	private String nomor_kk;
 	private String alamat;
 	private String RT;
 	private String RW;
@@ -18,4 +19,8 @@ public class KeluargaModel {
 	private KelurahanModel kelurahannya;
 	private KecamatanModel kecamatannya;
 	private KotaModel kotanya;
+	private List<PendudukModel> penduduk;
+	private KelurahanModel kelurahannya2;
+	private KecamatanModel kecamatannya2;
+	private KotaModel kotanya2;
 }

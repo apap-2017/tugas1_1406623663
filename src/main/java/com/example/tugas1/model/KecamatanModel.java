@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class KecamatanModel {
 	private int id;
 	private int id_kota;
-	private int kode_kecamatan;
+	private String kode_kecamatan;
 	private String nama_kecamatan;
 	private KotaModel kotanya;
 }

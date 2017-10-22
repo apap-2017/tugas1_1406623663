@@ -2,8 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>View Penduduk by NIK</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
     </head>
     <body>
+    		<div th:replace="fragments/header"></div>
       	<h3 th:text="'NIK = ' + ${penduduk.nik}">Penduduk NIK</h3>
 		<h3 th:text="'Nama = ' + ${penduduk.nama}">Penduduk Nama</h3>
 		<h3 th:text="'Tempat/Tanggal Lahir = ' + ${penduduk.tempat_lahir}+ ', '+${penduduk.tanggal_lahir}">Penduduk Tempat/tanggal Lahir</h3>
@@ -21,6 +23,8 @@
 		<h3 th:text="'Kelurahan/Desa = ' + ${penduduk.keluarganya.kelurahannya.nama_kelurahan}">Alamat</h3>
 		<h3 th:text="'Kecamatan = ' + ${penduduk.keluarganya.kelurahannya.kecamatannya.nama_kecamatan}">Alamat</h3>
 		<h3 th:text="'Kota = ' + ${penduduk.keluarganya.kelurahannya.kecamatannya.kotanya.nama_kota}">Alamat</h3>
+		
+		<div th:replace="fragments/footer"></div>
     </body>
 </html>
 

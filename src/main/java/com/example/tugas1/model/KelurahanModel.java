@@ -16,4 +16,6 @@ public class KelurahanModel {
 	private int kode_pos;
 	private KecamatanModel kecamatannya;
 	private KotaModel kotanya;
+	private KecamatanModel kecamatannya2;
+	private KotaModel kotanya2;
 }
