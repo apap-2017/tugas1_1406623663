@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add</title>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+</head>
+<body>
+	<div th:replace="fragments/header"></div>
+	<br />
+	<div id="cari" style="margin-left: 80px; margin-right: 80px">
+		<h2>Sukses!</h2>
+		<h5>Penduduk dengan NIK <a th:text="${penduduk.nik}"></a> berhasil ditambahkan!</h5>
+	</div>
+
+	<div th:replace="fragments/footer"></div>
+</body>
+</html>
+
+
